@@ -12,4 +12,14 @@ import bulmaQuickview from 'bulma-quickview/src/js'
 
 document.addEventListener("turbolinks:load", function() {
   let quickview = bulmaQuickview.attach();
+
+  const filesInput = document.querySelectorAll("input[type='file'].file-input");
+  filesInput.forEach(input => {
+    input.onchange = () => {
+      if (input.files.length > 0) {
+        const fileName = input.parentNode.querySelector('.file-name');
+        fileName.textContent = input.files[0].name;
+      }
+    }
+  })
 });
