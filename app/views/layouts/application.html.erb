@@ -5,6 +5,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-widthm initial-scale=1">
+    <link rel="manifest" href="/manifest.json">
+    <%= favicon_link_tag asset_path('favicon-192px.png') %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -16,10 +18,14 @@
         <div class="container">
           <div class="navbar-brand">
             <div class="navbar-item has-text-white-ter">
-              <%= image_tag "logo-menu.png" %>
+              <% if content_for?(:brand) %>
+                <%= yield :brand %>
+              <% else %>
+                <%= image_tag "logo-menu.png" %>
+              <% end %>
             </div>
 
-            <div class="navbar-item has-text-white-ter has-text-width-bold is-size-5">
+            <div class="navbar-item has-text-white-ter has-text-weigth-bold is-size-5">
               <%= yield :title %>
             </div>
 
@@ -46,7 +52,7 @@
           <div class="notification is-danger"><%= alert %></div>
         <% elsif notice %>
           <div class="notification is-success"><%= notice %></div>
-        <% end %>
+        <% end%>
         <%= yield %>
       </div>
     </div>
